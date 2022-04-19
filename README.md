@@ -6,4 +6,7 @@
 ### Which artist has earned the most according to Invoice Lines?
 ### Which genre of music is popular among customers?
 ### Who is the best customer?
+## The Repo consist of two file:
+<li> the insights with answer to the questions and the Visualization of the insight
+<li> the query of the  answer of the question
 
