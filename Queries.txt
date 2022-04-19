@@ -1,0 +1,49 @@
+/* Query 1: Who is the employee Respond to  the highest number of customers? */
+SELECT Employee.FirstName || ' ' || Employee.LastName AS FULL_Name,
+       COUNT(Customer.CustomerId) AS Number_of_Customers
+FROM Employee
+LEFT JOIN Customer ON EmployeeId = Customer.SupportRepId
+GROUP BY Full_Name
+ORDER BY Number_of_Customers DESC;
+
+
+/* Query 2: Which artist has earned the most according to Invoice Lines? */
+
+SELECT Artist.Name,
+       SUM(InvoiceLine.UnitPrice) AS Earning_USD
+FROM Artist
+JOIN Album ON Artist.ArtistId = Album.ArtistId
+JOIN Track ON Album.AlbumId = Track.AlbumId
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+GROUP BY Artist.Name
+ORDER BY Earning_USD DESC
+LIMIT 10;
+
+
+/* Query 3:Which genre of music is popular among customers?  */
+
+SELECT Genre.Name,
+       COUNT(Customer.CustomerId) AS Count_Of_Listening
+FROM Genre
+JOIN Track ON Genre.GenreId = Track.GenreId
+JOIN InvoiceLine ON Track.TrackId = InvoiceLine.TrackId
+JOIN Invoice ON InvoiceLine.InvoiceId = Invoice.InvoiceId
+JOIN Customer ON Invoice.CustomerId = Customer.CustomerId
+GROUP BY Genre.Name
+ORDER BY Count_Of_Listening DESC
+LIMIT 10;
+ 
+
+
+/* Query 4:Who is the best customer?  */
+
+SELECT Customer.FirstName || ' ' || Customer.LastName AS FULL_Name,
+       sum(InvoiceLine.UnitPrice) AS price
+FROM Customer
+JOIN Invoice ON Customer.CustomerId = Invoice.CustomerId
+JOIN InvoiceLine ON Invoice.InvoiceId = InvoiceLine.InvoiceId
+GROUP BY FULL_NAME
+ORDER BY price DESC
+LIMIT 10;
+
+
